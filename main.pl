@@ -8,7 +8,6 @@
 use strict;
 use warnings;
 use FeedFixer::Utils;
-use FeedFixer::AutoFixer;
 use File::Basename;
 use POSIX qw(strftime);
 my $VERSION = "1.0";
@@ -53,9 +52,6 @@ printAndLog ("Options: the feedfixer will check every " . $check_every .
             . ". It w" . ($log ? "ill log output to ${log_path}" :
             "on't log anything") . ", and it will save 'fixed' feeds in '"
             . dirname ($dump_path) . "/'.");
-printAndLog ("Please wait: initializing XML::FeedPP and XML::TreePP module autofixing..");
-FeedFixer::AutoFixer->clear_from_previous_execution()->find_module_path()->patch_file()->clear_vars();
-printAndLog ("Patching complete, proceeding..");
 printAndLog ("Initializing modules..");
 my $total_modules = scalar @{$modules_enabled};
 my %modules_reference;

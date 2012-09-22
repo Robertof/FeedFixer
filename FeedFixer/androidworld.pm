@@ -12,7 +12,7 @@ use FeedFixer::Utils ':all'; # export constants
 use Digest::MD5 qw(md5_hex);
 use File::Spec;
 use FeedFixer::RobParser;
-use FeedFixer::AutoFixer;
+use XML::FeedPP;
 
 use constant {
     BLACKLIST => 0,
@@ -97,11 +97,6 @@ sub getFeed
 {
     # let the fun begin
     my $self = shift;
-    # check if XML::{Tree,Feed}PP files were patched
-    ( !FeedFixer::AutoFixer->has_been_patched() &&
-        FeedFixer::Utils->d ("*PP.pm files not patched. WTF happened?") );
-    # require 'em
-    if (!$imported) { $imported = 1; require FeedFixer::XML::FeedPP; }
     $self->lp (sprintf ("'getFeed' subroutine called. Fetching main feed (%s)",
                $self->{misc_feed}));
     # first step: get the original feed
@@ -118,7 +113,7 @@ sub getFeed
     }
     my @links;
     # read XML
-    my $rss = FeedFixer::XML::FeedPP->new ($req->[2]);
+    my $rss = XML::FeedPP->new ($req->[2]);
     #$rss->load ($req->[2]);
     my @items = $rss->get_item();
     my $count = scalar ( @items );
