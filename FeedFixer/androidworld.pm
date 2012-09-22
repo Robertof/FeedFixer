@@ -19,8 +19,6 @@ use constant {
     WHITELIST => 1
 };
 
-my $imported = 0;
-
 sub new
 {
     main::printAndLog ("[AndroidWorld Plugin] AW Plugin initialized.");
