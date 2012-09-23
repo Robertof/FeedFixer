@@ -65,7 +65,7 @@ sub start
         # I'll explain that later. (ln 130)
         if ($tag =~ /^div$/i)
         {
-            return if ( ( exists $attr->{"class"} and $attr->{"class"} eq "playstore" ) );
+            #return if ( ( exists $attr->{"class"} and $attr->{"class"} eq "playstore" ) );
             $div_depth++;
         }
         # replace text-align style values, because they are ugly on feeds
