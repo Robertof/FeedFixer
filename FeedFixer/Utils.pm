@@ -44,6 +44,7 @@ sub d
 sub w
 {
     cluck $_[1] . "\n";
+    return 1;
 }
 
 # get a complete path from an URI object
@@ -79,7 +80,7 @@ sub do_http_get_request
         PeerAddr => $uo->host,
         PeerPort => 80,
         Proto    => "tcp"
-    ) or $self->d ("Cannot open the socket for " . $uo->host . ": ${!}");
+    ) or ( $self->w ("Cannot open the socket for " . $uo->host . ": ${!}") && return REQ_FAILED );
     # write
     print $sock "GET " . $self->get_path_from_uri ($uo) . " HTTP/1.1\n";
     print $sock "Host: " . $uo->host . "\n";
